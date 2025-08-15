@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>हरियाणा CET Subjects</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #e6f7ff, #ffffff); color: #333; animation: fadeIn 1s ease-in-out; }
+    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    header { background: linear-gradient(90deg, #007b5e, #00b894); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    header p { font-size: 1.2rem; margin-bottom: 20px; }
+    .search-box { margin: 0 auto; max-width: 400px; }
+    .search-box input { width: 100%; padding: 10px 15px; border-radius: 30px; border: none; font-size: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); outline: none; }
+    main { max-width: 1100px; margin: 30px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+    .subject-card { background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; animation: popIn 0.5s ease-in-out; }
+    .subject-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    .subject-card h2 { color: #007b5e; margin-bottom: 10px; }
+    .subject-card p { font-size: 0.95rem; line-height: 1.6; }
+    a.button { display: inline-block; margin-top: 12px; padding: 8px 16px; background: #00b894; color: white; text-decoration: none; border-radius: 5px; transition: background 0.3s ease; }
+    a.button:hover { background: #019877; }
+    footer { text-align: center; padding: 20px; background-color: #f1f1f1; margin-top: 40px; color: #555; }
+    @media (max-width: 600px) { header h1 { font-size: 1.8rem; } header p { font-size: 1rem; } }
+</style>
+<!-- Google AdSense Script -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body>
+
+<!-- TOP GOOGLE AD -->
+<div style="text-align:center; margin-top:10px;">
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXX"  <!-- अपना Client ID डालें -->
+        data-ad-slot="1111111111"                <!-- अपना Ad Slot डालें -->
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<header>
+    <h1>हरियाणा CET विषय होमपेज</h1>
+    <p>अपनी तैयारी के लिए नीचे दिए गए विषय चुनें</p>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="विषय खोजें..." onkeyup="filterSubjects()">
+    </div>
+</header>
+
+<main id="subjectList">
+    <div class="subject-card">
+        <h2>📘 General Knowledge</h2>
+        <p>इतिहास, भूगोल, हरियाणा GK, अर्थव्यवस्था और करंट अफेयर्स से जुड़ी जानकारी।</p>
+        <a class="button" href="#">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>🧠 Reasoning</h2>
+        <p>तर्क शक्ति, लॉजिकल सोच, कोडिंग-डिकोडिंग, पजल्स आदि शामिल हैं।</p>
+        <a class="button" href="#">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>➗ Quantitative Aptitude</h2>
+        <p>प्रतिशत, अनुपात, समय-कार्य, लाभ-हानि जैसे बेसिक गणितीय प्रश्न।</p>
+        <a class="button" href="#">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>📝 General Hindi</h2>
+        <p>हिंदी व्याकरण, मुहावरे, पर्यायवाची, विलोम और गद्यांश आधारित प्रश्न।</p>
+        <a class="button" href="#">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>📖 English Language</h2>
+        <p>अंग्रेज़ी व्याकरण, शब्दावली, comprehension और sentence correction।</p>
+        <a class="button" href="#">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>💻 Computer Awareness</h2>
+        <p>कंप्यूटर के मूलभूत ज्ञान, MS Office, हार्डवेयर, सॉफ्टवेयर और इंटरनेट।</p>
+        <a class="button" href="#">पढ़ें</a>
+    </div>
+</main>
+
+<!-- BOTTOM GOOGLE AD -->
+<div style="text-align:center; margin:20px 0;">
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXX"  <!-- अपना Client ID डालें -->
+        data-ad-slot="2222222222"                <!-- अपना Ad Slot डालें -->
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer>
+    © 2025 Haryana CET Study Portal | सभी अधिकार सुरक्षित
+</footer>
+
+<script>
+function filterSubjects() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.subject-card');
+    cards.forEach(card => {
+        const title = card.querySelector('h2').innerText.toLowerCase();
+        card.style.display = title.includes(input) ? 'block' : 'none';
+    });
+}
+</script>
+
+</body>
+</html>
