@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>हरियाणा CET MCQ क्विज़</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg,#e6f7ff,#ffffff); margin:0; color:#0f172a;}
+  header{background:linear-gradient(90deg,#007b5e,#00b894); color:white; padding:18px; display:flex; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:10;}
+  .brand{font-weight:700;font-size:1.05rem;}
+  .tabs{display:flex; gap:8px; margin-left:12px; flex-wrap:wrap;}
+  .tab{background:rgba(255,255,255,0.08); color:#fff; padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600;}
+  .tab.active{background:#fff;color:#007b5e;}
+  .searchwrap{margin-left:auto; min-width:200px; max-width:380px; width:35%;}
+  .searchwrap input{width:100%; padding:8px 12px; border-radius:999px; border:none; outline:none;}
+  .container{max-width:1100px; margin:20px auto; padding:12px;}
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
+  .qa-card{background:#fff; border-radius:10px; padding:14px; box-shadow:0 6px 18px rgba(2,6,23,0.06); margin-bottom:12px; border:1px solid rgba(2,6,23,0.04);}
+  .q-title{font-weight:700;color:#007b5e; margin-bottom:8px; font-size:1rem;}
+  .options{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:8px; margin-top:6px;}
+  .option{background:#f8fafc; border:1px solid rgba(2,6,23,0.06); padding:10px 12px; border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:10px; font-weight:600; transition:background .18s, transform .06s, border-color .12s;}
+  .option:hover{transform:translateY(-2px);}
+  .option.disabled{cursor:not-allowed; opacity:0.8; transform:none;}
+  .option.correct{background:#d1fae5; border-color:#10b981; color:#065f46;}
+  .option.wrong{background:#fee2e2; border-color:#ef4444; color:#7f1d1d;}
+  .option .mark{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-weight:800;}
+  .option.correct .mark{background:#10b981;color:white;}
+  .option.wrong .mark{background:#ef4444;color:white;}
+  .explanation{margin-top:8px;color:#0f172a; background:rgba(2,6,23,0.02); padding:8px; border-radius:6px; display:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">हरियाणा CET — MCQ अभ्यास</div>
+  <div class="tabs" role="tablist" aria-label="विषय टैब">
+    <div class="tab active" data-target="history" onclick="openTab(event)">इतिहास</div>
+    <div class="tab" data-target="geography" onclick="openTab(event)">भूगोल</div>
+    <div class="tab" data-target="haryana" onclick="openTab(event)">हरियाणा GK</div>
+    <div class="tab" data-target="economy" onclick="openTab(event)">अर्थव्यवस्था</div>
+    <div class="tab" data-target="current" onclick="openTab(event)">करंट अफेयर्स</div>
+  </div>
+  <div class="searchwrap">
+    <input id="globalSearch" type="search" placeholder="किसी प्रश्न/विकल्प में खोजें..." />
+  </div>
+</header>
+
+<main class="container">
+
+<!-- HISTORY -->
+<section id="history" class="tab-content active">
+  <div class="qa-card">
+    <div class="q-title">1) पानीपत की पहली लड़ाई कब हुई थी?</div>
+    <div class="options">
+      <div class="option" data-correct="true"><span class="mark"></span> 1526</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 1556</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 1527</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 1540</div>
+    </div>
+    <div class="explanation">पानीपत की पहली लड़ाई 1526 में बाबर और इब्राहिम लोदी के बीच हुई थी।</div>
+  </div>
+  <div class="qa-card">
+    <div class="q-title">2) चंद्रगुप्त मौर्य के गुरु कौन थे?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> विभीषण</div>
+      <div class="option" data-correct="true"><span class="mark"></span> चाणक्य (कौटिल्य)</div>
+      <div class="option" data-correct="false"><span class="mark"></span> आचार्य बाण</div>
+      <div class="option" data-correct="false"><span class="mark"></span> किंशुक</div>
+    </div>
+    <div class="explanation">चाणक्य ने चंद्रगुप्त मौर्य को मार्गदर्शन दिया।</div>
+  </div>
+  <div class="qa-card">
+    <div class="q-title">3) दिल्ली सल्तनत की स्थापना किसने की थी?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> मोहम्मद बिन तुगलक</div>
+      <div class="option" data-correct="true"><span class="mark"></span> कुतुब-उद-दीन ऐबक</div>
+      <div class="option" data-correct="false"><span class="mark"></span> इल्तुतमिश</div>
+      <div class="option" data-correct="false"><span class="mark"></span> अलाउद्दीन खिलजी</div>
+    </div>
+    <div class="explanation">कुतुब-उद-दीन ऐबक ने 1206 में दिल्ली सल्तनत की नींव रखी।</div>
+  </div>
+</section>
+
+<!-- GEOGRAPHY -->
+<section id="geography" class="tab-content">
+  <div class="qa-card">
+    <div class="q-title">1) भारत का सबसे बड़ा राज्य कौन सा है?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> महाराष्ट्र</div>
+      <div class="option" data-correct="true"><span class="mark"></span> राजस्थान</div>
+      <div class="option" data-correct="false"><span class="mark"></span> मध्य प्रदेश</div>
+      <div class="option" data-correct="false"><span class="mark"></span> उत्तर प्रदेश</div>
+    </div>
+    <div class="explanation">क्षेत्रफल के हिसाब से राजस्थान सबसे बड़ा राज्य है।</div>
+  </div>
+  <div class="qa-card">
+    <div class="q-title">2) गंगा नदी का उद्गम स्थल कहाँ है?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> गोमुख</div>
+      <div class="option" data-correct="false"><span class="mark"></span> मनसरोवर</div>
+      <div class="option" data-correct="true"><span class="mark"></span> गंगोत्री ग्लेशियर</div>
+      <div class="option" data-correct="false"><span class="mark"></span> सतलुज</div>
+    </div>
+    <div class="explanation">गंगा का पारंपरिक उद्गम गंगोत्री ग्लेशियर से माना जाता है।</div>
+  </div>
+</section>
+
+<!-- HARYANA GK -->
+<section id="haryana" class="tab-content">
+  <div class="qa-card">
+    <div class="q-title">1) हरियाणा की राजधानी कौन सी है?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> गुड़गाँव</div>
+      <div class="option" data-correct="false"><span class="mark"></span> हिसार</div>
+      <div class="option" data-correct="true"><span class="mark"></span> चंडीगढ़</div>
+      <div class="option" data-correct="false"><span class="mark"></span> पंचकूला</div>
+    </div>
+    <div class="explanation">चंडीगढ़ हरियाणा और पंजाब दोनों की संयुक्त राजधानी है।</div>
+  </div>
+  <div class="qa-card">
+    <div class="q-title">2) हरियाणा का गठन किस वर्ष हुआ?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> 1950</div>
+      <div class="option" data-correct="true"><span class="mark"></span> 1966</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 1971</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 1947</div>
+    </div>
+    <div class="explanation">हरियाणा का गठन 1 नवम्बर 1966 को हुआ।</div>
+  </div>
+</section>
+
+<!-- ECONOMY -->
+<section id="economy" class="tab-content">
+  <div class="qa-card">
+    <div class="q-title">1) GDP का पूरा नाम क्या है?</div>
+    <div class="options">
+      <div class="option" data-correct="true"><span class="mark"></span> Gross Domestic Product</div>
+      <div class="option" data-correct="false"><span class="mark"></span> General Domestic Product</div>
+      <div class="option" data-correct="false"><span class="mark"></span> Gross Domestic Price</div>
+      <div class="option" data-correct="false"><span class="mark"></span> General Discounted Product</div>
+    </div>
+    <div class="explanation">GDP = Gross Domestic Product, किसी देश की कुल वस्तु व सेवाओं का मूल्य।</div>
+  </div>
+  <div class="qa-card">
+    <div class="q-title">2) भारतीय रिज़र्व बैंक की स्थापना कब हुई?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> 26 जनवरी 1950</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 15 अगस्त 1947</div>
+      <div class="option" data-correct="true"><span class="mark"></span> 1 अप्रैल 1935</div>
+      <div class="option" data-correct="false"><span class="mark"></span> 1 जनवरी 1920</div>
+    </div>
+    <div class="explanation">RBI की स्थापना 1 अप्रैल 1935 को हुई थी।</div>
+  </div>
+</section>
+
+<!-- CURRENT AFFAIRS -->
+<section id="current" class="tab-content">
+  <div class="qa-card">
+    <div class="q-title">1) 2024 के समर ओलंपिक कहाँ आयोजित हुए थे?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> टोक्यो</div>
+      <div class="option" data-correct="true"><span class="mark"></span> पेरिस</div>
+      <div class="option" data-correct="false"><span class="mark"></span> लंदन</div>
+      <div class="option" data-correct="false"><span class="mark"></span> रियो डी जेनेरो</div>
+    </div>
+    <div class="explanation">2024 समर ओलंपिक पेरिस में आयोजित हुए थे।</div>
+  </div>
+  <div class="qa-card">
+    <div class="q-title">2) करंट इवेंट की जानकारी कहाँ देखें?</div>
+    <div class="options">
+      <div class="option" data-correct="false"><span class="mark"></span> केवल सोशल मीडिया</div>
+      <div class="option" data-correct="true"><span class="mark"></span> आधिकारिक समाचार स्रोत / सरकारी पोर्टल</div>
+      <div class="option" data-correct="false"><span class="mark"></span> अंजाने ब्लॉग</div>
+      <div class="option" data-correct="false"><span class="mark"></span> किसी भी अज्ञात स्रोत</div>
+    </div>
+    <div class="explanation">विश्वसनीय जानकारी के लिए सरकारी और प्रमुख समाचार स्रोत देखें।</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+function openTab(e){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  const target = e.currentTarget.getAttribute('data-target');
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(target).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.querySelectorAll('.option').forEach(opt=>{
+  opt.addEventListener('click', function(){
+    const parent = this.closest('.qa-card');
+    if(parent.getAttribute('data-answered')==='true') return;
+    const isCorrect = this.getAttribute('data-correct')==='true';
+    if(isCorrect){ this.classList.add('correct'); this.querySelector('.mark').textContent='✔'; }
+    else {
+      this.classList.add('wrong'); this.querySelector('.mark').textContent='✖';
+      const correctOpt = parent.querySelector('.option[data-correct="true"]');
+      correctOpt.classList.add('correct'); correctOpt.querySelector('.mark').textContent='✔';
+    }
+    parent.querySelectorAll('.option').forEach(o=>o.classList.add('disabled'));
+    parent.querySelector('.explanation').style.display='block';
+    parent.setAttribute('data-answered','true');
+  });
+});
+
+document.getElementById('globalSearch').addEventListener('input', function(){
+  const term = this.value.trim().toLowerCase();
+  document.querySelectorAll('.qa-card').forEach(card=>{
+    const q = card.querySelector('.q-title').innerText.toLowerCase();
+    const opts = Array.from(card.querySelectorAll('.option')).map(o=>o.innerText.toLowerCase()).join(' ');
+    card.style.display = (q.includes(term)||opts.includes(term)||term==='')?'':'none';
+  });
+});
+
+document.querySelectorAll('.option').forEach(o=>o.setAttribute('tabindex','0'));
+document.addEventListener('keydown', function(e){
+  if(e.key==='Enter' && document.activeElement.classList.contains('option')){
+    document.activeElement.click();
+  }
+});
+</script>
+
+</body>
+</html>
