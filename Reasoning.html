@@ -4,14 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>हरियाणा CET MCQ क्विज़</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg,#e6f7ff,#ffffff); margin:0; color:#0f172a;}
-  header{background:linear-gradient(90deg,#007b5e,#00b894); color:white; padding:18px; display:flex; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:10;}
-  .brand{font-weight:700;font-size:1.05rem;}
-  .tabs{display:flex; gap:8px; margin-left:12px; flex-wrap:wrap;}
+  header{background:linear-gradient(90deg,#007b5e,#00b894); color:white; padding:14px; display:flex; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:10;}
+  .brand{font-weight:700;font-size:1.05rem; margin-right:12px;}
+  .tabs{display:flex; gap:8px; margin-right:12px; flex-wrap:wrap;}
   .tab{background:rgba(255,255,255,0.08); color:#fff; padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600;}
   .tab.active{background:#fff;color:#007b5e;}
-  .searchwrap{margin-left:auto; min-width:200px; max-width:380px; width:35%;}
+  .scoreboard{display:flex; gap:12px; font-weight:600; align-items:center; margin-right:auto;}
+  .scoreboard span{padding:6px 12px; border-radius:8px;}
+  .correct-count{background:#10b98133; color:#065f46;}
+  .wrong-count{background:#ef444433; color:#7f1d1d;}
+  .download-btn{background:#2563eb; color:white; border:none; border-radius:6px; padding:6px 12px; cursor:pointer;}
+  .download-btn:hover{background:#1d4ed8;}
+  .searchwrap{min-width:200px; max-width:380px; width:35%;}
   .searchwrap input{width:100%; padding:8px 12px; border-radius:999px; border:none; outline:none;}
   .container{max-width:1100px; margin:20px auto; padding:12px;}
   .tab-content{display:none;}
@@ -28,22 +36,40 @@
   .option.correct .mark{background:#10b981;color:white;}
   .option.wrong .mark{background:#ef4444;color:white;}
   .explanation{margin-top:8px;color:#0f172a; background:rgba(2,6,23,0.02); padding:8px; border-radius:6px; display:none;}
+  
+  /* Hidden canvas for chart rendering */
+  .hidden-chart {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="brand">हरियाणा CET — Reasoning</div>
-  <div class="tabs" role="tablist" aria-label="विषय टैब">
+  <div class="tabs" role="tablist">
     <div class="tab active" data-target="Reasoning Power" onclick="openTab(event)">तर्क शक्ति</div>
     <div class="tab" data-target="Logical Thinking" onclick="openTab(event)">लॉजिकल सोच</div>
-    <div class="tab" data-target="Coding Decoding" onclick="openTab(event)">कोडिंग-डिकोडिंग</div>
+    <div class="tab" data-target="Coding-Decoding" onclick="openTab(event)">कोडिंग-डिकोडिंग</div>
     <div class="tab" data-target="Puzzles" onclick="openTab(event)">पजल्स</div>
   </div>
+
+  <!-- ✅ Scoreboard -->
+  <div class="scoreboard">
+    <span class="correct-count">✔ सही: <span id="correctCount">0</span></span>
+    <span class="wrong-count">❌ गलत: <span id="wrongCount">0</span></span>
+    <button class="download-btn" onclick="downloadPDF()">📥 PDF डाउनलोड</button>
+  </div>
+
   <div class="searchwrap">
-    <input id="globalSearch" type="search" placeholder="किसी प्रश्न/विकल्प में खोजें..." />
+    <input id="globalSearch" size="10" type="search" placeholder="किसी प्रश्न/विकल्प में खोजें..." />
   </div>
 </header>
+
+<!-- Hidden canvas for chart -->
+<canvas id="chartCanvas" class="hidden-chart" width="400" height="400"></canvas>
 
 <main class="container">
 
@@ -4458,11 +4484,12 @@
     <div class="explanation">प्रत्येक संख्या आधी हो रही है: 16 ÷ 2 = 8</div>
 </div>
 </section>
-
-
 </main>
 
 <script>
+let correct=0, wrong=0;
+let chartInstance = null;
+
 function openTab(e){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   e.currentTarget.classList.add('active');
@@ -4474,34 +4501,155 @@ function openTab(e){
 
 document.querySelectorAll('.option').forEach(opt=>{
   opt.addEventListener('click', function(){
-    const parent = this.closest('.qa-card');
+    const parent=this.closest('.qa-card');
     if(parent.getAttribute('data-answered')==='true') return;
-    const isCorrect = this.getAttribute('data-correct')==='true';
-    if(isCorrect){ this.classList.add('correct'); this.querySelector('.mark').textContent='✔'; }
-    else {
-      this.classList.add('wrong'); this.querySelector('.mark').textContent='✖';
-      const correctOpt = parent.querySelector('.option[data-correct="true"]');
-      correctOpt.classList.add('correct'); correctOpt.querySelector('.mark').textContent='✔';
-    }
+    const isCorrect=this.getAttribute('data-correct')==='true';
+    if(isCorrect){ this.classList.add('correct'); this.querySelector('.mark').textContent='✔'; correct++; }
+    else { this.classList.add('wrong'); this.querySelector('.mark').textContent='✖'; 
+      const c=parent.querySelector('.option[data-correct="true"]');
+      c.classList.add('correct'); c.querySelector('.mark').textContent='✔'; wrong++; }
     parent.querySelectorAll('.option').forEach(o=>o.classList.add('disabled'));
     parent.querySelector('.explanation').style.display='block';
     parent.setAttribute('data-answered','true');
+    document.getElementById('correctCount').textContent=correct;
+    document.getElementById('wrongCount').textContent=wrong;
   });
 });
+
+function createChart() {
+  const canvas = document.getElementById('chartCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Destroy existing chart if it exists
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+  
+  // Only create chart if there are results
+  if (correct === 0 && wrong === 0) {
+    return Promise.resolve(null);
+  }
+  
+  return new Promise((resolve) => {
+    chartInstance = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['सही उत्तर', 'गलत उत्तर'],
+        datasets: [{
+          data: [correct, wrong],
+          backgroundColor: ['#10b981', '#ef4444'],
+          borderColor: ['#059669', '#dc2626'],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 0
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              font: {
+                size: 14
+              },
+              padding: 20
+            }
+          },
+          title: {
+            display: true,
+            text: 'क्विज़ परिणाम',
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    });
+    
+    // Wait for chart to render
+    setTimeout(() => {
+      resolve(canvas);
+    }, 500);
+  });
+}
+
+async function downloadPDF() {
+  try {
+    // Check if jsPDF is loaded
+    if (typeof window.jspdf === 'undefined') {
+      alert('PDF लाइब्रेरी लोड नहीं हो सकी। कृपया पेज को रिफ्रेश करें।');
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
+    
+    // Set font (using default fonts since Hindi font isn't available in jsPDF)
+    doc.setFontSize(16);
+    doc.text('Haryana CET Quiz Report', 20, 20);
+    
+    doc.setFontSize(12);
+    doc.text(`Correct Answers: ${correct}`, 20, 35);
+    doc.text(`Wrong Answers: ${wrong}`, 20, 45);
+    doc.text(`Total Questions Attempted: ${correct + wrong}`, 20, 55);
+    
+    if (correct + wrong > 0) {
+      const percentage = ((correct / (correct + wrong)) * 100).toFixed(1);
+      doc.text(`Accuracy: ${percentage}%`, 20, 65);
+    }
+
+    // Create and add chart if there are results
+    if (correct > 0 || wrong > 0) {
+      const canvas = await createChart();
+      if (canvas) {
+        const imgData = canvas.toDataURL('image/png', 1.0);
+        doc.addImage(imgData, 'PNG', 20, 75, 80, 80);
+      }
+    } else {
+      doc.text('कोई प्रश्न हल नहीं किया गया।', 20, 85);
+    }
+    
+    // Add date and time
+    const now = new Date();
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`, 20, 270);
+    
+    // Save the PDF
+    doc.save(`haryana_cet_quiz_report_${Date.now()}.pdf`);
+    
+    alert('PDF सफलतापूर्वक डाउनलोड हो गई!');
+    
+  } catch (error) {
+    console.error('PDF download error:', error);
+    alert('PDF डाउनलोड करने में समस्या आई। कृपया दोबारा कोशिश करें।');
+  }
+}
 
 document.getElementById('globalSearch').addEventListener('input', function(){
-  const term = this.value.trim().toLowerCase();
+  const term=this.value.trim().toLowerCase();
   document.querySelectorAll('.qa-card').forEach(card=>{
-    const q = card.querySelector('.q-title').innerText.toLowerCase();
-    const opts = Array.from(card.querySelectorAll('.option')).map(o=>o.innerText.toLowerCase()).join(' ');
-    card.style.display = (q.includes(term)||opts.includes(term)||term==='')?'':'none';
+    const q=card.querySelector('.q-title').innerText.toLowerCase();
+    const opts=Array.from(card.querySelectorAll('.option')).map(o=>o.innerText.toLowerCase()).join(' ');
+    card.style.display=(q.includes(term)||opts.includes(term)||term==='')?'':'none';
   });
 });
 
-document.querySelectorAll('.option').forEach(o=>o.setAttribute('tabindex','0'));
-document.addEventListener('keydown', function(e){
-  if(e.key==='Enter' && document.activeElement.classList.contains('option')){
-    document.activeElement.click();
+// Wait for libraries to load
+window.addEventListener('load', function() {
+  console.log('Page loaded');
+  if (typeof window.jspdf !== 'undefined') {
+    console.log('jsPDF loaded successfully');
+  } else {
+    console.error('jsPDF not loaded');
+  }
+  if (typeof Chart !== 'undefined') {
+    console.log('Chart.js loaded successfully');
+  } else {
+    console.error('Chart.js not loaded');
   }
 });
 </script>
