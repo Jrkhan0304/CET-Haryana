@@ -49,7 +49,7 @@
     <div class="tab" data-target="economy" onclick="openTab(event)">अर्थव्यवस्था</div>
     <div class="tab" data-target="current" onclick="openTab(event)">करंट अफेयर्स</div>
   </div>
-  <!-- ✅ Scoreboard -->
+ <!-- ✅ Scoreboard -->
   <div class="scoreboard">
     <span class="correct-count">✔ सही: <span id="correctCount">0</span></span>
     <span class="wrong-count">❌ गलत: <span id="wrongCount">0</span></span>
@@ -7961,58 +7961,73 @@ document.querySelectorAll('.option').forEach(opt=>{
   });
 });
 
-async function downloadPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+function downloadPDF() {
+  try {
+    // Check if jsPDF is available
+    if (typeof window.jspdf === 'undefined') {
+      alert('PDF library लोड नहीं हुई है। पेज को रिफ्रेश करके पुनः प्रयास करें।');
+      return;
+    }
 
-  // Adding Title and Score
-  doc.setFontSize(14);
-  doc.text("हरियाणा CET — Reasoning Quiz रिपोर्ट", 10, 15);
-  doc.text(`✔ सही: ${correct}`, 10, 30);
-  doc.text(`❌ गलत: ${wrong}`, 10, 40);
-
-  // Create chart off-screen
-  const canvas = document.createElement('canvas');
-  canvas.width = 200; 
-  canvas.height = 200;
-
-  const chart = new Chart(canvas.getContext('2d'), {
-    type: 'pie',
-    data: {
-      labels: ['सही', 'गलत'],
-      datasets: [{
-        data: [correct, wrong],
-        backgroundColor: ['#10b981', '#ef4444']
-      }]
-    },
-    options: { animation: false, plugins: { legend: { position: 'bottom' } } }
-  });
-
-  // Ensure the chart is fully rendered
-  await new Promise(resolve => {
-    chart.options.animation = false;
-    chart.update();
-    resolve();
-  });
-
-  const imgData = canvas.toDataURL('image/png');
-
-  // Add chart image to PDF
-  doc.addImage(imgData, 'PNG', 10, 50, 100, 100);
-
-  // Save the PDF
-  doc.save("quiz_report.pdf");
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Add content to PDF
+    doc.setFontSize(16);
+    doc.text('Haryana CET - Reasoning Quiz Report', 20, 20);
+    
+    doc.setFontSize(12);
+    doc.text(`Correct Answers: ${correct}`, 20, 40);
+    doc.text(`Wrong Answers: ${wrong}`, 20, 50);
+    doc.text(`Total Questions Attempted: ${correct + wrong}`, 20, 60);
+    
+    if (correct + wrong > 0) {
+      const percentage = ((correct / (correct + wrong)) * 100).toFixed(1);
+      doc.text(`Accuracy: ${percentage}%`, 20, 70);
+    }
+    
+    doc.text('Generated on: ' + new Date().toLocaleString(), 20, 80);
+    
+    // Create simple bar chart representation
+    doc.setFontSize(14);
+    doc.text('Performance Summary:', 20, 100);
+    
+    // Draw simple bars
+    const maxWidth = 100;
+    const total = correct + wrong;
+    
+    if (total > 0) {
+      const correctWidth = (correct / total) * maxWidth;
+      const wrongWidth = (wrong / total) * maxWidth;
+      
+      // Correct answers bar
+      doc.setFillColor(16, 185, 129); // Green
+      doc.rect(20, 110, correctWidth, 10, 'F');
+      doc.text(`Correct: ${correct}`, 130, 118);
+      
+      // Wrong answers bar  
+      doc.setFillColor(239, 68, 68); // Red
+      doc.rect(20, 125, wrongWidth, 10, 'F');
+      doc.text(`Wrong: ${wrong}`, 130, 133);
+    }
+    
+    // Save the PDF
+    doc.save('haryana_cet_quiz_report.pdf');
+    
+  } catch (error) {
+    console.error('PDF Error:', error);
+    alert('PDF बनाने में समस्या आई। कृपया पुनः प्रयास करें।');
+  }
 }
 
-document.getElementById('globalSearch').addEventListener('input', function() {
-  const term = this.value.trim().toLowerCase();
-  document.querySelectorAll('.qa-card').forEach(card => {
-    const q = card.querySelector('.q-title').innerText.toLowerCase();
-    const opts = Array.from(card.querySelectorAll('.option')).map(o => o.innerText.toLowerCase()).join(' ');
-    card.style.display = (q.includes(term) || opts.includes(term) || term === '') ? '' : 'none';
+document.getElementById('globalSearch').addEventListener('input', function(){
+  const term=this.value.trim().toLowerCase();
+  document.querySelectorAll('.qa-card').forEach(card=>{
+    const q=card.querySelector('.q-title').innerText.toLowerCase();
+    const opts=Array.from(card.querySelectorAll('.option')).map(o=>o.innerText.toLowerCase()).join(' ');
+    card.style.display=(q.includes(term)||opts.includes(term)||term==='')?'':'none';
   });
 });
-
 
 // ✅ Options shuffle function
 function shuffleOptions(){
@@ -8029,6 +8044,6 @@ function shuffleOptions(){
 // ✅ Page load पर shuffle
 window.addEventListener('load', shuffleOptions);
 </script>
-</body>
 
+</body>
 </html>
