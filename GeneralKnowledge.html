@@ -7961,45 +7961,58 @@ document.querySelectorAll('.option').forEach(opt=>{
   });
 });
 
-async function downloadPDF(){
+async function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
+
+  // Adding Title and Score
   doc.setFontSize(14);
   doc.text("हरियाणा CET — Reasoning Quiz रिपोर्ट", 10, 15);
   doc.text(`✔ सही: ${correct}`, 10, 30);
   doc.text(`❌ गलत: ${wrong}`, 10, 40);
 
-  const canvas=document.createElement('canvas');
-  canvas.width=200; canvas.height=200;
+  // Create chart off-screen
+  const canvas = document.createElement('canvas');
+  canvas.width = 200; 
+  canvas.height = 200;
 
-  new Chart(canvas.getContext('2d'),{
-    type:'pie',
-    data:{
-      labels:['सही','गलत'],
-      datasets:[{
-        data:[correct,wrong],
-        backgroundColor:['#10b981','#ef4444']
+  const chart = new Chart(canvas.getContext('2d'), {
+    type: 'pie',
+    data: {
+      labels: ['सही', 'गलत'],
+      datasets: [{
+        data: [correct, wrong],
+        backgroundColor: ['#10b981', '#ef4444']
       }]
     },
-    options:{animation:false, plugins:{legend:{position:'bottom'}}}
+    options: { animation: false, plugins: { legend: { position: 'bottom' } } }
   });
 
-  setTimeout(()=>{
-    const imgData=canvas.toDataURL('image/png');
-    doc.addImage(imgData,'PNG',10,50,100,100);
-    doc.save("quiz_report.pdf");
-  }, 800);
+  // Ensure the chart is fully rendered
+  await new Promise(resolve => {
+    chart.options.animation = false;
+    chart.update();
+    resolve();
+  });
+
+  const imgData = canvas.toDataURL('image/png');
+
+  // Add chart image to PDF
+  doc.addImage(imgData, 'PNG', 10, 50, 100, 100);
+
+  // Save the PDF
+  doc.save("quiz_report.pdf");
 }
 
-document.getElementById('globalSearch').addEventListener('input', function(){
-  const term=this.value.trim().toLowerCase();
-  document.querySelectorAll('.qa-card').forEach(card=>{
-    const q=card.querySelector('.q-title').innerText.toLowerCase();
-    const opts=Array.from(card.querySelectorAll('.option')).map(o=>o.innerText.toLowerCase()).join(' ');
-    card.style.display=(q.includes(term)||opts.includes(term)||term==='')?'':'none';
+document.getElementById('globalSearch').addEventListener('input', function() {
+  const term = this.value.trim().toLowerCase();
+  document.querySelectorAll('.qa-card').forEach(card => {
+    const q = card.querySelector('.q-title').innerText.toLowerCase();
+    const opts = Array.from(card.querySelectorAll('.option')).map(o => o.innerText.toLowerCase()).join(' ');
+    card.style.display = (q.includes(term) || opts.includes(term) || term === '') ? '' : 'none';
   });
-
 });
+
 
 // ✅ Options shuffle function
 function shuffleOptions(){
