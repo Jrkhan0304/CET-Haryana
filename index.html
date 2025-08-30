@@ -162,5 +162,312 @@
         padding: 12px 20px; 
         background: #00b894; 
         color: white; 
-        text-decoration: none; 
-        bo
+        text-decoration: none; 
+        border-radius: 8px; 
+        transition: background 0.3s ease; 
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    a.button:hover { 
+        background: #019877; 
+    }
+    
+    footer { 
+        text-align: center; 
+        padding: 20px 15px; 
+        background-color: #f1f1f1; 
+        margin-top: 30px; 
+        color: #555; 
+        font-size: 0.9rem;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .modal-content {
+        background-color: white;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 70vh;
+        overflow-y: auto;
+        position: relative;
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .modal-header h3 {
+        color: #007b5e;
+        font-size: 1.2rem;
+    }
+    
+    .close {
+        color: #aaa;
+        font-size: 1.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 1;
+    }
+    
+    .close:hover {
+        color: #333;
+    }
+    
+    .modal-body {
+        line-height: 1.6;
+        color: #555;
+    }
+    
+    .modal-body h4 {
+        color: #007b5e;
+        margin: 15px 0 8px 0;
+    }
+    
+    .modal-body p {
+        margin-bottom: 10px;
+    }
+
+    /* Extra mobile optimizations */
+    @media (max-width: 480px) {
+        header { padding: 15px 10px; }
+        header h1 { font-size: 1.6rem; }
+        .search-box { padding: 0 5px; }
+        main { padding: 10px; }
+        .subject-card { 
+            padding: 15px; 
+            margin-bottom: 12px; 
+        }
+        .subject-card h2 { font-size: 1.2rem; }
+        .subject-card p { font-size: 0.95rem; }
+        a.button { padding: 10px 15px; font-size: 1rem; }
+        
+        .menu-button {
+            top: 12px;
+            right: 10px;
+            font-size: 1.6rem;
+        }
+        
+        .dropdown-menu {
+            right: 10px;
+            top: 45px;
+        }
+        
+        .modal-content {
+            margin: 20% auto;
+            width: 95%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <button class="menu-button" onclick="toggleMenu()">⋮</button>
+    
+    <div class="dropdown-menu" id="dropdownMenu">
+        <ul>
+            <li><a href="#" onclick="openModal('privacy')">Privacy Policy</a></li>
+            <li><a href="#" onclick="openModal('disclaimer')">Disclaimer</a></li>
+            <li><a href="#" onclick="openModal('about')">About App</a></li>
+        </ul>
+    </div>
+    
+    <h1>हरियाणा CET विषय होमपेज</h1>
+    <p>अपनी तैयारी के लिए नीचे दिए गए विषय चुनें</p>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="विषय खोजें..." onkeyup="filterSubjects()">
+    </div>
+</header>
+
+<main id="subjectList">
+    <div class="subject-card">
+        <h2>📘 General Knowledge</h2>
+        <p>इतिहास, भूगोल, हरियाणा GK, अर्थव्यवस्था और करंट अफेयर्स से जुड़ी जानकारी।</p>
+        <a class="button" href="/CET-Haryana/GeneralKnowledge.html">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>🧠 Reasoning</h2>
+        <p>तर्क शक्ति, लॉजिकल सोच, कोडिंग-डिकोडिंग, पजल्स आदि शामिल हैं।</p>
+        <a class="button" href="/CET-Haryana/Reasoning.html">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>➗ Quantitative Aptitude</h2>
+        <p>प्रतिशत, अनुपात, समय-कार्य, लाभ-हानि जैसे बेसिक गणितीय प्रश्न।</p>
+        <a class="button" href="/CET-Haryana/Quantitative Aptitude.html">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>📝 General Hindi</h2>
+        <p>हिंदी व्याकरण, मुहावरे, पर्यायवाची, विलोम और गद्यांश आधारित प्रश्न।</p>
+        <a class="button" href="/CET-Haryana/General Hindi.html">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>📖 English Language</h2>
+        <p>अंग्रेज़ी व्याकरण, शब्दावली, comprehension और sentence correction।</p>
+        <a class="button" href="/CET-Haryana/English Language.html">पढ़ें</a>
+    </div>
+    <div class="subject-card">
+        <h2>💻 Computer Awareness</h2>
+        <p>कंप्यूटर के मूलभूत ज्ञान, MS Office, हार्डवेयर, सॉफ्टवेयर और इंटरनेट।</p>
+        <a class="button" href="/CET-Haryana/Computer Awareness.html">पढ़ें</a>
+    </div>
+</main>
+
+<!-- Modal for Privacy Policy -->
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Privacy Policy</h3>
+            <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+        </div>
+        <div class="modal-body">
+            <h4>Information Collection</h4>
+            <p>We collect minimal information necessary for app functionality. No personal data is stored or shared with third parties.</p>
+            
+            <h4>Data Usage</h4>
+            <p>Any data collected is used solely for improving user experience and app performance.</p>
+            
+            <h4>Data Security</h4>
+            <p>We implement appropriate security measures to protect your information.</p>
+            
+            <h4>Contact</h4>
+            <p>For privacy concerns, please contact us through the app feedback.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Disclaimer -->
+<div id="disclaimerModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Disclaimer</h3>
+            <span class="close" onclick="closeModal('disclaimerModal')">&times;</span>
+        </div>
+        <div class="modal-body">
+            <h4>Educational Purpose</h4>
+            <p>This app is designed for educational purposes only. All content is provided for study and preparation assistance.</p>
+            
+            <h4>Content Accuracy</h4>
+            <p>While we strive for accuracy, we cannot guarantee all information is 100% current or error-free. Please verify important information.</p>
+            
+            <h4>Exam Results</h4>
+            <p>Success in exams depends on individual preparation. This app is a study aid and does not guarantee exam results.</p>
+            
+            <h4>Liability</h4>
+            <p>We are not responsible for any decisions made based on the information provided in this app.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for About App -->
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>About App</h3>
+            <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+        </div>
+        <div class="modal-body">
+            <h4>हरियाणा CET Study Portal</h4>
+            <p>यह एप्प हरियाणा CET (Common Eligibility Test) की तैयारी के लिए बनाया गया है।</p>
+            
+            <h4>Features</h4>
+            <p>• Complete subject-wise study material</p>
+            <p>• Mobile-friendly interface</p>
+            <p>• Easy navigation and search</p>
+            <p>• Comprehensive coverage of all CET topics</p>
+            
+            <h4>Version</h4>
+            <p>Version 1.0 - Released 2025</p>
+            
+            <h4>Developer</h4>
+            <p>Haryana CET Study Portal Team</p>
+            
+            <p><strong>Best of luck for your preparation! 📚</strong></p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    © 2025 Haryana CET Study Portal | सभी अधिकार सुरक्षित
+</footer>
+
+<script>
+function filterSubjects() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.subject-card');
+    cards.forEach(card => {
+        const title = card.querySelector('h2').innerText.toLowerCase();
+        card.style.display = title.includes(input) ? 'block' : 'none';
+    });
+}
+
+function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('active');
+}
+
+function openModal(type) {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.remove('active');
+    
+    let modalId;
+    switch(type) {
+        case 'privacy':
+            modalId = 'privacyModal';
+            break;
+        case 'disclaimer':
+            modalId = 'disclaimerModal';
+            break;
+        case 'about':
+            modalId = 'aboutModal';
+            break;
+    }
+    
+    document.getElementById(modalId).style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('dropdownMenu');
+    const menuButton = document.querySelector('.menu-button');
+    
+    if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</body>
+</html>
