@@ -8,111 +8,159 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #e6f7ff, #ffffff); color: #333; animation: fadeIn 1s ease-in-out; }
     @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
-    header { background: linear-gradient(90deg, #007b5e, #00b894); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-    header p { font-size: 1.2rem; margin-bottom: 20px; }
-    .search-box { margin: 0 auto; max-width: 400px; }
-    .search-box input { width: 100%; padding: 10px 15px; border-radius: 30px; border: none; font-size: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); outline: none; }
-    main { max-width: 1100px; margin: 30px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-    .subject-card { background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; animation: popIn 0.5s ease-in-out; }
-    .subject-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
-    @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-    .subject-card h2 { color: #007b5e; margin-bottom: 10px; }
-    .subject-card p { font-size: 0.95rem; line-height: 1.6; }
-    a.button { display: inline-block; margin-top: 12px; padding: 8px 16px; background: #00b894; color: white; text-decoration: none; border-radius: 5px; transition: background 0.3s ease; }
-    a.button:hover { background: #019877; }
-    footer { text-align: center; padding: 20px; background-color: #f1f1f1; margin-top: 40px; color: #555; }
-    @media (max-width: 600px) { header h1 { font-size: 1.8rem; } header p { font-size: 1rem; } }
-</style>
-<!-- Google AdSense Script -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-</head>
-<body>
-
-<!-- TOP GOOGLE AD -->
-<!-- Google AdSense Test Ad -->
-<div style="text-align:center; margin:4px 0;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-3940256099942544"
-       data-ad-slot="6300978111"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-</div>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-
-
-<header>
-    <h1>हरियाणा CET विषय होमपेज</h1>
-    <p>अपनी तैयारी के लिए नीचे दिए गए विषय चुनें</p>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="विषय खोजें..." onkeyup="filterSubjects()">
-    </div>
-</header>
-
-<main id="subjectList">
-    <div class="subject-card">
-        <h2>📘 General Knowledge</h2>
-        <p>इतिहास, भूगोल, हरियाणा GK, अर्थव्यवस्था और करंट अफेयर्स से जुड़ी जानकारी।</p>
-        <a class="button" href="/CET-Haryana/GeneralKnowledge.html">पढ़ें</a>
-    </div>
-    <div class="subject-card">
-        <h2>🧠 Reasoning</h2>
-        <p>तर्क शक्ति, लॉजिकल सोच, कोडिंग-डिकोडिंग, पजल्स आदि शामिल हैं।</p>
-        <a class="button" href="/CET-Haryana/Reasoning.html">पढ़ें</a>
-    </div>
-    <div class="subject-card">
-        <h2>➗ Quantitative Aptitude</h2>
-        <p>प्रतिशत, अनुपात, समय-कार्य, लाभ-हानि जैसे बेसिक गणितीय प्रश्न।</p>
-        <a class="button" href="/CET-Haryana/Quantitative Aptitude.html">पढ़ें</a>
-    </div>
-    <div class="subject-card">
-        <h2>📝 General Hindi</h2>
-        <p>हिंदी व्याकरण, मुहावरे, पर्यायवाची, विलोम और गद्यांश आधारित प्रश्न।</p>
-        <a class="button" href="/CET-Haryana/General Hindi.html">पढ़ें</a>
-    </div>
-    <div class="subject-card">
-        <h2>📖 English Language</h2>
-        <p>अंग्रेज़ी व्याकरण, शब्दावली, comprehension और sentence correction।</p>
-        <a class="button" href="/CET-Haryana/English Language.html">पढ़ें</a>
-    </div>
-    <div class="subject-card">
-        <h2>💻 Computer Awareness</h2>
-        <p>कंप्यूटर के मूलभूत ज्ञान, MS Office, हार्डवेयर, सॉफ्टवेयर और इंटरनेट।</p>
-        <a class="button" href="/CET-Haryana/Computer Awareness.html">पढ़ें</a>
-    </div>
-</main>
-
-<!-- BOTTOM GOOGLE AD -->
-<div style="text-align:center; margin-top:5px;">
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3940256099942544"
-        data-ad-slot="6300978111"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-
-<footer>
-    © 2025 Haryana CET Study Portal | सभी अधिकार सुरक्षित
-</footer>
-
-<script>
-function filterSubjects() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.subject-card');
-    cards.forEach(card => {
-        const title = card.querySelector('h2').innerText.toLowerCase();
-        card.style.display = title.includes(input) ? 'block' : 'none';
-    });
-}
-</script>
-
-</body>
-</html>
+    
+    header { 
+        background: linear-gradient(90deg, #007b5e, #00b894); 
+        color: white; 
+        padding: 20px 15px; 
+        text-align: center; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        position: relative;
+    }
+    
+    /* Menu Button */
+    .menu-button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: 5px 8px;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+        z-index: 1000;
+    }
+    .menu-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Dropdown Menu */
+    .dropdown-menu {
+        position: absolute;
+        top: 50px;
+        right: 15px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1001;
+    }
+    
+    .dropdown-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .dropdown-menu ul {
+        list-style: none;
+        padding: 8px 0;
+    }
+    
+    .dropdown-menu li {
+        padding: 0;
+    }
+    
+    .dropdown-menu a {
+        display: block;
+        padding: 12px 16px;
+        color: #333;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: background-color 0.2s ease;
+    }
+    
+    .dropdown-menu a:hover {
+        background-color: #f5f5f5;
+    }
+    
+    .dropdown-menu a:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .dropdown-menu a:last-child {
+        border-radius: 0 0 8px 8px;
+    }
+    
+    header h1 { 
+        font-size: 1.8rem; 
+        margin-bottom: 8px; 
+        line-height: 1.2;
+    }
+    header p { 
+        font-size: 1rem; 
+        margin-bottom: 15px; 
+        line-height: 1.4;
+    }
+    
+    .search-box { 
+        margin: 0 auto; 
+        max-width: 100%; 
+        padding: 0 10px;
+    }
+    .search-box input { 
+        width: 100%; 
+        padding: 12px 20px; 
+        border-radius: 25px; 
+        border: none; 
+        font-size: 1.1rem; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        outline: none;
+        background: white;
+    }
+    
+    main { 
+        max-width: 100%; 
+        margin: 20px auto; 
+        padding: 15px; 
+        display: block;
+    }
+    
+    .subject-card { 
+        background-color: white; 
+        border-radius: 12px; 
+        padding: 20px; 
+        margin-bottom: 15px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1); 
+        transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        animation: popIn 0.5s ease-in-out; 
+    }
+    .subject-card:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+    }
+    
+    @keyframes popIn { 
+        from { opacity: 0; transform: scale(0.95); } 
+        to { opacity: 1; transform: scale(1); } 
+    }
+    
+    .subject-card h2 { 
+        color: #007b5e; 
+        margin-bottom: 10px; 
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+    .subject-card p { 
+        font-size: 1rem; 
+        line-height: 1.6; 
+        margin-bottom: 15px;
+        color: #555;
+    }
+    
+    a.button { 
+        display: block; 
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px; 
+        background: #00b894; 
+        color: white; 
+        text-decoration: none; 
+        bo
